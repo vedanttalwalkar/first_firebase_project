@@ -12,7 +12,8 @@ class FirebaseManager {
     products = instanceOfFirestore
         .collection(constants.products)
         .withConverter<Product>(
-          fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()as Map<String,dynamic>),
+          fromFirestore: (snapshot, _) =>
+              Product.fromJson(snapshot.data() as Map<String, dynamic>),
           toFirestore: (product, _) => product.toJson(),
         );
   }

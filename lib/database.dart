@@ -1,23 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_firebase_project/firebase_manager.dart';
 import 'package:first_firebase_project/product.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
   FirebaseManager firestoreInstance = FirebaseManager.firebaseManager;
-  Database._();
+  Database._() {}
+  List<Product> products = [];
   static final database = Database._();
-  Future<List<Product>> fetchProducts() async {
-    return firestoreInstance.products.get().then((value) async {
-      if (value.docs.isEmpty) {
-        return [];
-      }
-      print("Data testing " + value.docs.length.toString());
+  Future<void> fetchProducts() async {
+    QuerySnapshot querySnapshot = await firestoreInstance.products.get();
 
-      return value.docs
-          .map(
-            (e) => e.data(),
-          )
-          .toList() as Future<List<Product>>;
-    });
+    for (var element in querySnapshot.docs) {
+      products.add(element.data() as Product);
+    }
   }
 }
