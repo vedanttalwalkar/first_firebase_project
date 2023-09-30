@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:first_firebase_project/firebase_options.dart';
+import 'package:first_firebase_project/database/firebase_options.dart';
 import 'package:first_firebase_project/product_listing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +16,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ProductListingPage(),
+    return MaterialApp(
+      theme: ThemeData.light().copyWith(
+          textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(37, 32, 28, 255))),
+          useMaterial3: true,
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: const Color.fromRGBO(37, 32, 28, 255))),
+      home: const ProductListingPage(),
     );
   }
 }
