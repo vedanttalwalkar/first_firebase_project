@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_firebase_project/database/database.dart';
 import 'package:first_firebase_project/product.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,14 @@ class _ProductListingPageState extends State<ProductListingPage> {
                         itemBuilder: (context, index) {
                           return ListTile(
                               trailing: IconButton(
-                                  onPressed: () {}, icon: const Icon(Icons.add)),
+                                  onPressed: () {
+                                    snapshot.data![index].quantity++;
+
+                                    FirebaseFirestore.instance
+                                        .collection("Cart")
+                                        .add(snapshot.data![index].toJson());
+                                  },
+                                  icon: const Icon(Icons.add)),
                               subtitle:
                                   Text('₹. ${snapshot.data![index].price}'),
                               title: Text(

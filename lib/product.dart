@@ -1,9 +1,10 @@
 class Product {
+  int quantity = 0;
   final String name;
   final int category;
   final double price;
   final String pictureUrl;
-  const Product(
+  Product(
       {required this.name,
       required this.category,
       required this.price,
@@ -21,6 +22,7 @@ class Product {
   Map<String, Object> toJson() {
     return {
       "name": name,
+      "quantity":quantity,
       "category": category,
       "price": price,
       "pictureUrl": pictureUrl
